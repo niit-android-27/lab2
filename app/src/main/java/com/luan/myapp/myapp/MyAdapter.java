@@ -34,13 +34,25 @@ public class MyAdapter extends ArrayAdapter<User>{
                         @Nullable View convertView,
                         @NonNull ViewGroup parent) {
         Log.e("ConverView",(convertView==null)+"");
+        ViewHolder viewHolder;
         if(convertView==null){
             convertView = inflater.inflate(resource, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.tvName =(TextView)convertView.findViewById(R.id.tvName);
+            viewHolder.tvPhone=(TextView)convertView.findViewById(R.id.tvPhone);
+            convertView.setTag(viewHolder);
+        }else{
+             viewHolder=(ViewHolder) convertView.getTag();
         }
-        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        TextView tvPhone = (TextView) convertView.findViewById(R.id.tvPhone);
-        tvName.setText(getItem(position).getName());
-        tvPhone.setText(getItem(position).getPhone());
+       // TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
+       // TextView tvPhone = (TextView) convertView.findViewById(R.id.tvPhone);
+        viewHolder.tvName.setText(getItem(position).getName());
+        viewHolder.tvPhone.setText(getItem(position).getPhone());
         return convertView;
+    }
+
+    static class ViewHolder{
+       TextView tvName;
+       TextView tvPhone;
     }
 }
