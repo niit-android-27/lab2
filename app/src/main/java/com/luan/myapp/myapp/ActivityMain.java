@@ -2,7 +2,10 @@ package com.luan.myapp.myapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,10 +35,43 @@ public class ActivityMain extends AppCompatActivity {
         this._generateData();
         setContentView(R.layout.list_user);
         ListView listView = (ListView)findViewById(R.id.lstUser);
-        MyAdapter myAdapter =new MyAdapter(ActivityMain.this,
-                R.layout.item_listview,
-                users);
+//        MyAdapter myAdapter =new MyAdapter(ActivityMain.this,
+//                R.layout.item_listview,
+//                users);
+        final MyBaseAdapter myAdapter = new MyBaseAdapter(ActivityMain.this,
+                R.layout.item_listview,users);
         listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(ActivityMain.this,users.get(i).getName(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+               if(i+i1 >= i2){
+                   //loading more
+                   Log.e("Loading more","Loading more");
+                   for (int j=0;j<10;j++){
+                       User user = new User();
+                       user.setId(j);
+                       user.setName("Ten "+j);
+                       user.setPhone("012345586 "+j);
+                       users.add(user);
+                   }
+                   myAdapter.notifyDataSetChanged();
+               }
+            }
+        });
+
+
+
 
         //setContentView(R.layout.activity_main);
         /*edtFullName =(EditText)findViewById(R.id.edtFullName);
