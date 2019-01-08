@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="0,1,2,3"
+   >
+    <TableRow>
+        <TextView
+            android:text="test"
+            android:padding="3dip"
+            android:layout_span="1"
+            />
+
+        <TextView
+            android:text="test"
+            android:padding="3dip"
+            android:layout_span="1"/>
+
+        <TextView
+            android:text="test"
+            android:padding="3dip"
+            android:layout_span="1"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="dfdf"
+            android:padding="3dip" />
+        <TextView
+            android:text="s"
+            android:gravity="right"
+            android:padding="3dip" />
+    </TableRow>
+</TableLayout>
